@@ -1,57 +1,74 @@
 import math, cmath
 from functools import reduce
-## Allow list of numbers 
+## Allow list of numbers in number 1
 ## float, integer or complex number, check numbers is a type of number
-## 
 ## if type is not a number then it returns ValueError exception
-def add(numbers):
+def add(number1, number2=0):
     number_types = (int, float, complex)
-    if all(isinstance(item, number_types) for item in numbers):
-        return reduce(lambda a,b: a+b, numbers)
+    if (type(number1) == list) and (all(isinstance(item, number_types) for item in number1)):
+        return reduce(lambda a,b: a+b, number1)
+    if isinstance(number1, number_types) and isinstance(number2, number_types):
+        return number1 + number2
     else:
         raise ValueError
-        
+  
+## Allow list of numbers in number 1
+## if a list then the first number in number1 is divided by one or more number from 2 onwards.
 ## Divide two numbers the first by the second, check both number 1 and 2 are either a 
 ## float, integer or complex number, once number1 and 2 have a type of number
 ## then number 1 and 2 are divided and returned as the result
 ## if type is not a number then it returns ValueError exception
-def divide(number1, number2):
+def divide(number1, number2=1):
     number_types = (int, float, complex)
+    if (type(number1) == list) and (all(isinstance(item, number_types) for item in number1)):
+        return reduce(lambda a,b: a/b, number1)
     if isinstance(number1, number_types) and isinstance(number2, number_types):
         if number2 == 0:
             return 'Division by zero not allowed'
         return number1 / number2
     else:
         raise ValueError
-
+        
+## Allow list of numbers in number1 
+## if a list then the first number in number1 is the number that becomes the power of 2nd number in number1 and onwards
 ## To power of, number is to the power of number 2, check both number 1 and 2 are either a 
 ## float, integer or complex number, once number1 and 2 have a type of number
 ## then number 2 is the power of number 1 and returned as the result
 ## if type is not a number then it returns ValueError exception
-def exponent(number1, number2):
+def exponent(number1, number2=1):
     number_types = (int, float, complex)
+    if (type(number1) == list) and (all(isinstance(item, number_types) for item in number1)):
+        return reduce(lambda a,b: a**b, number1)
     if isinstance(number1, number_types) and isinstance(number2, number_types):
         return number1 ** number2
     else:
         raise ValueError
-        
+ 
+## Allow list of numbers in number1 
+## if a list then each number in the list is muiplied by the one next to it      
 ## Muitlply two number together, check both number 1 and 2 are either a 
 ## float, integer or complex number, once number1 and 2 have a type of number
 ## then number 1 and 2 are Muitliplied together and returned as the result
 ## if type is not a number then it returns ValueError exception
-def multiply(number1, number2):
+def multiply(number1, number2=1):
     number_types = (int, float, complex)
+    if (type(number1) == list) and (all(isinstance(item, number_types) for item in number1)):
+        return reduce(lambda a,b: a*b, number1)
     if isinstance(number1, number_types) and isinstance(number2, number_types):
         return number1 * number2
     else:
         raise ValueError
 
+## Allow list of numbers in number1 
+## if a list then each number subsequent number is subtracted from the first number in the number1 list      
 ## subtract  number2 from number 1, check both number 1 and 2 are either a 
 ## float, integer or complex number, once number1 and 2 have a type of number
 ## then number2 is taken from number 1  and returned as the result
 ## if type is not a number then it returns ValueError exception        
-def subtract(number1, number2):
+def subtract(number1, number2=0):
     number_types = (int, float, complex)
+    if (type(number1) == list) and (all(isinstance(item, number_types) for item in number1)):
+        return reduce(lambda a,b: a-b, number1)
     if isinstance(number1, number_types) and isinstance(number2, number_types):
         return number1 - number2
     else:
