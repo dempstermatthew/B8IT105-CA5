@@ -1,6 +1,6 @@
 import unittest
 from calc import add, multiply, subtract, divide, exponent, sqroot, square 
-from calc import cube, sin, cos, tan, factorial
+from calc import cube, sin, cos, tan, factorial, cubic_generator, fahrenheit, celsius
 
 class CalculatorTest(unittest.TestCase):
 	
@@ -101,6 +101,8 @@ class CalculatorTest(unittest.TestCase):
         self.assertNotEqual(-3, sqroot(-9))
         ## exception tests
         self.assertRaises(ValueError, sqroot, 'zero')
+         ## list of numbers
+        self.assertEqual([3,9] ,sqroot([9,81])) 
         
     def testSquare(self):
         ## positive tests
@@ -115,6 +117,8 @@ class CalculatorTest(unittest.TestCase):
         self.assertNotEqual(-81, square(-9))
         ## exception tests
         self.assertRaises(ValueError, square, 'zero')
+         ## list of numbers
+        self.assertEqual([9,81, 4,16] ,square([3,9, 2, 4])) 
     
     def testCube(self):
         ## positive tests
@@ -129,42 +133,60 @@ class CalculatorTest(unittest.TestCase):
         self.assertNotEqual(729, cube(-9))
         ## exception tests
         self.assertRaises(ValueError, cube, 'zero')
+        ## list of numbers
+        self.assertEqual([729,125,216] ,cube([9, 5, 6])) 
+        ##generator single
+        for i, elem in enumerate(cubic_generator(4)):
+            result = elem
+        self.assertEqual(64, result) 
+        ##generator single list
+        cubGen=(cubic_generator([8,6]))
+        for i in cubGen:
+            result =i
+        self.assertEqual([512, 216] ,result) 
+        
     
     def testSine(self):
         ## positive tests
-        self.assertEqual(0.1411200080598672, sin(3))
-        self.assertEqual(-0.1411200080598672, sin(-3))
-        self.assertEqual(0.5984721441039565, sin(2.5))
-                
+        self.assertEqual(0.052335956242943835, sin(3))
+        ## list of numbers
+        self.assertEqual(-0.052335956242943835, sin(-3))
+                       
         ## negative tests
         self.assertNotEqual(36, sin(6.25))
         self.assertNotEqual(729, sin(-9))
         ## exception tests
         self.assertRaises(ValueError, sin, 'zero')
+        ## list of numbers
+        self.assertEqual([0.052335956242943835,0.08715574274765817, 0.10452846326765347] ,sin([3, 5, 6])) 
         
     def testCosine(self):
         ## positive tests
-        self.assertEqual(-0.9899924966004454, cos(3))
-        self.assertEqual(-0.9899924966004454, cos(-3))
-        self.assertEqual(-0.8011436155469337, cos(2.5))
+        self.assertEqual(0.9986295347545738, cos(3))
+        self.assertEqual(0.9986295347545738, cos(-3))
+        self.assertEqual(0.9990482215818578, cos(2.5))
                 
         ## negative tests
-        self.assertNotEqual(-0.14, sin(-3))
-        self.assertNotEqual(-0.14, sin(3))
+        self.assertNotEqual(-0.14, cos(-3))
+        self.assertNotEqual(-0.14, cos(3))
         ## exception tests
-        self.assertRaises(ValueError, sin, 'zero')
+        self.assertRaises(ValueError, cos, 'zero')
+        ## list of numbers
+        self.assertEqual([0.9986295347545738,0.9961946980917455, 0.9945218953682733] ,cos([3, 5, 6])) 
         
     def testTangent(self):
         ## positive tests
-        self.assertEqual(-0.1425465430742778, tan(3))
-        self.assertEqual(0.1425465430742778, tan(-3))
-        self.assertEqual(-0.7470222972386603, tan(2.5))
+        self.assertEqual(0.05240777928304121, tan(3))
+        self.assertEqual(-0.05240777928304121, tan(-3))
+        self.assertEqual(0.04366094290851206, tan(2.5))
                 
         ## negative tests
         self.assertNotEqual(-0.14, tan(-3))
         self.assertNotEqual(-0.14, tan(3))
         ## exception tests
         self.assertRaises(ValueError, tan, 'zero')
+         ## list of numbers
+        self.assertEqual([0.05240777928304121,0.08748866352592401, 0.10510423526567647] ,tan([3, 5, 6])) 
         
     def testFactorial(self):
         ## positive tests
@@ -179,6 +201,17 @@ class CalculatorTest(unittest.TestCase):
         self.assertRaises(ValueError, factorial, 'zero')
         self.assertRaises(ValueError, factorial, -3)
         self.assertRaises(ValueError, factorial, 2.5)
+          ## list of numbers
+        self.assertEqual([24, 362880, 1] ,factorial([4, 9, 0])) 
+     
+    
+    ## #r = map(func, seq)
+    def testFahrenheitCelsius(self):
+        temp = (36.5, 40, 37.5, 39)
+        F = list(map(fahrenheit, temp))
+        self.assertEqual([97.7, 104.0, 99.5, 102.2], F)
+        C = list(map(celsius, F))
+        self.assertEqual([36.5, 40.0, 37.5, 39.0], C)
        
     
     
